@@ -1,5 +1,5 @@
 import axios from "axios";
-const url="api/post"
+const url="https://hosting-wi34.onrender.com/api/post"
 
 export default class API{
     static async getAllBook(){
