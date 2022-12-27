@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row no-gutters>
-      <div v-if="Object.keys(book).length === '0'" class="main_contanier">
+      <div v-if="loading" class="main_contanier">
         <grid-loader
           :loading="loading"
           :color="color"
@@ -58,10 +58,16 @@ export default {
       book: {},
       color: "#1976d2",
       size: "30px",
+      loading: false,
     };
   },
   async created() {
+    this.loading = true;
+
     const response = await API.getBookById(this.$route.params.id);
+    if (response) {
+      this.loading = false;
+    }
     this.book = response;
     console.log(this.book, "book");
   },

@@ -10,7 +10,7 @@
       >{{ this.$route.params.message }}
     </v-alert>
     <v-row no-gutters>
-      <div v-if="books.length === '0'" class="main_contanier">
+      <div v-if="loading" class="main_contanier">
         <grid-loader
           :loading="loading"
           :color="color"
@@ -52,10 +52,15 @@ export default {
       books: [],
       color: "#1976d2",
       size: "30px",
+      loading:false
     };
   },
   async created() {
+    this.loading=true;
     this.books = await API.getAllBook();
+    if(this.books){
+      this.loading=false;
+    }
     console.log(this.books, "book");
   },
 };
